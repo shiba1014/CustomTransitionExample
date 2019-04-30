@@ -8,6 +8,11 @@
 
 import UIKit
 
+fileprivate struct Const {
+    static let duration: Double = 0.5
+    static let offset: CGFloat = 50
+}
+
 class VerticalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     private let isPresenting: Bool
 
@@ -16,7 +21,7 @@ class VerticalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
+        return Const.duration
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -26,7 +31,7 @@ class VerticalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         transitionContext.containerView.backgroundColor = .white
         transitionContext.containerView.insertSubview(toView, belowSubview: fromView)
 
-        let offset: CGFloat = isPresenting ? 50 : -50
+        let offset: CGFloat = isPresenting ? Const.offset : -Const.offset
 
         toView.alpha = 0
         toView.transform = CGAffineTransform(translationX: 0, y: offset)
@@ -58,7 +63,7 @@ class HorizontalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
+        return Const.duration
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -67,7 +72,7 @@ class HorizontalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 
         transitionContext.containerView.insertSubview(toView, belowSubview: fromView)
 
-        let offset: CGFloat = scrollDirection == .right ? -50 : 50
+        let offset: CGFloat = scrollDirection == .right ? -Const.offset : Const.offset
 
         toView.alpha = 0
         toView.transform = CGAffineTransform(translationX: offset, y: 0)
